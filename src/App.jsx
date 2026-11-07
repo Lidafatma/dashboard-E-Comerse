@@ -3,7 +3,7 @@ import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, CartesianGrid, LineChart, Line 
 } from "recharts";
 import { 
-  LayoutDashboard, ShoppingBag, CreditCard, Star, MapPin, Package, Search, Bell, Receipt, Percent, Repeat, ThumbsUp, ThumbsDown, TrendingUp, Users, Settings, Download, DollarSign, Award, Layers, CheckCircle2, Shield
+  LayoutDashboard, ShoppingBag, CreditCard, Star, MapPin, Package, Search, Bell, Receipt, Percent, Repeat, ThumbsUp, ThumbsDown, TrendingUp, Users, Settings, Download, DollarSign, Award, Layers, CheckCircle2, Shield, Palette, Check
 } from "lucide-react";
 
 // Data aggregated from your cleaned Olist CSV datasets
@@ -124,22 +124,145 @@ const D = {
   ]
 };
 
+
+// ───────────────────────── THEMES ─────────────────────────
+// Tambah tema baru cukup dengan menambah satu objek di sini.
+const THEMES = {
+  ocean: {
+    name: "Ocean Sky",
+    desc: "Warna asli dashboard · biru langit dengan glass lembut",
+    swatch: ["#020617", "#0b2538", "#0e4a5e", "#0ea5e9", "#38bdf8", "#34d399"],
+    bg: "linear-gradient(135deg,#020617 0%,#0b2538 50%,#0e4a5e 100%)",
+    orbs: { a: "#38bdf8", b: "#0e7490", o: 0.16 },
+    vars: {
+      "--c1": "#7dd3fc", "--c2": "#6ee7b7", "--c3": "#fcd34d", "--c4": "#f9a8d4",
+      "--accent-solid": "#0ea5e9", "--accent-solid-2": "#4f46e5", "--neg-solid": "#ec4899",
+      "--glow": "rgba(56,189,248,.25)",
+      "--glass-bg": "rgba(255,255,255,.06)", "--glass-hover": "rgba(255,255,255,.10)",
+      "--glass-border": "rgba(255,255,255,.10)",
+      "--glass-shadow": "0 8px 32px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06)",
+      "--blur": "24px",
+      "--sidebar-bg": "rgba(15,23,42,.60)", "--thead-bg": "#0c283c", "--select-bg": "#1e293b",
+      "--input-bg": "rgba(255,255,255,.05)",
+      "--nav-active-bg": "rgba(14,165,233,.30)", "--nav-active-border": "rgba(56,189,248,.30)",
+      "--pill-bg": "#ffffff", "--pill-text": "#0f172a",
+    },
+    chart: ["#38bdf8", "#34d399", "#fbbf24", "#f472b6", "#a78bfa", "#64748b"],
+    primary: "#38bdf8", secondary: "#34d399", warn: "#fbbf24", neg: "#f472b6",
+    tick: "#cbd5e1", tick2: "#94a3b8", tip: "#0f2a3d",
+  },
+  teal: {
+    name: "Teal Glass",
+    desc: "Glassmorphism teal · #05161A → #6DA5C0 dengan cahaya cyan",
+    swatch: ["#05161A", "#072E33", "#0C7075", "#0F969C", "#6DA5C0", "#294D61"],
+    bg: "radial-gradient(ellipse 70% 45% at 50% 0%,rgba(15,150,156,.45) 0%,transparent 70%),linear-gradient(160deg,#05161A 0%,#072E33 55%,#06232b 100%)",
+    orbs: { a: "#22e5f5", b: "#0F969C", o: 0.34 },
+    vars: {
+      "--c1": "#86e3e8", "--c2": "#8cc4dd", "--c3": "#f4d58d", "--c4": "#f5a3b5",
+      "--accent-solid": "#0F969C", "--accent-solid-2": "#294D61", "--neg-solid": "#d9667e",
+      "--glow": "rgba(34,229,245,.28)",
+      "--glass-bg": "linear-gradient(135deg,rgba(109,165,192,.17) 0%,rgba(15,150,156,.07) 100%)",
+      "--glass-hover": "linear-gradient(135deg,rgba(109,165,192,.26) 0%,rgba(15,150,156,.13) 100%)",
+      "--glass-border": "rgba(150,230,236,.20)",
+      "--glass-shadow": "0 10px 36px rgba(0,10,14,.55), inset 0 1px 0 rgba(255,255,255,.16), inset 0 -1px 0 rgba(15,150,156,.15)",
+      "--blur": "28px",
+      "--sidebar-bg": "linear-gradient(180deg,rgba(7,46,51,.62) 0%,rgba(5,22,26,.78) 100%)",
+      "--thead-bg": "#0a3138", "--select-bg": "#072E33",
+      "--input-bg": "rgba(109,165,192,.10)",
+      "--nav-active-bg": "linear-gradient(90deg,rgba(15,150,156,.60) 0%,rgba(109,165,192,.28) 100%)",
+      "--nav-active-border": "rgba(150,230,236,.38)",
+      "--pill-bg": "#6DA5C0", "--pill-text": "#05161A",
+    },
+    chart: ["#19c3cb", "#6DA5C0", "#0F969C", "#a6eef0", "#4b86a3", "#2f7387"],
+    primary: "#19c3cb", secondary: "#6DA5C0", warn: "#f4d58d", neg: "#f08ca0",
+    tick: "#bfe6ea", tick2: "#7fb0bd", tip: "#072E33",
+  },
+  crimson: {
+    name: "Crimson Magenta",
+    desc: "Gaya Glassmorphism nuansa magenta & crimson gelap yang elegan",
+    swatch: ["#2b020d", "#800021", "#881144", "#c24366", "#ff69b4", "#ffe4d8"],
+    bg: "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(194,67,102,0.35) 0%, transparent 70%), linear-gradient(160deg, #1f0109 0%, #3b0213 55%, #150005 100%)",
+    orbs: { a: "#ff69b4", b: "#881144", o: 0.28 },
+    vars: {
+      "--c1": "#ffb3d1", "--c2": "#ffe4d8", "--c3": "#fcd34d", "--c4": "#f9a8d4",
+      "--accent-solid": "#c24366", "--accent-solid-2": "#800021", "--neg-solid": "#ff4d6d",
+      "--glow": "rgba(255,105,180,0.25)",
+      "--glass-bg": "linear-gradient(135deg, rgba(194,67,102,0.18) 0%, rgba(128,0,33,0.10) 100%)",
+      "--glass-hover": "linear-gradient(135deg, rgba(194,67,102,0.28) 0%, rgba(136,17,68,0.18) 100%)",
+      "--glass-border": "rgba(255,179,209,0.22)",
+      "--glass-shadow": "0 10px 36px rgba(25,0,8,0.6), inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 0 rgba(194,67,102,0.2)",
+      "--blur": "26px",
+      "--sidebar-bg": "linear-gradient(180deg, rgba(59,2,19,0.65) 0%, rgba(31,1,9,0.82) 100%)",
+      "--thead-bg": "#470417", "--select-bg": "#3b0213",
+      "--input-bg": "rgba(194,67,102,0.12)",
+      "--nav-active-bg": "linear-gradient(90deg, rgba(194,67,102,0.65) 0%, rgba(255,105,180,0.30) 100%)",
+      "--nav-active-border": "rgba(255,179,209,0.40)",
+      "--pill-bg": "#ffe4d8", "--pill-text": "#800021",
+    },
+    chart: ["#ff69b4", "#c24366", "#ffe4d8", "#ffb3d1", "#881144", "#a23b5a"],
+    primary: "#ff69b4", secondary: "#c24366", warn: "#fcd34d", neg: "#ff4d6d",
+    tick: "#ffc2d6", tick2: "#d4829c", tip: "#3b0213",
+  },
+
+  // ❄️ TEMA 2: Pastel Frost Glass (Dari Gambar 2)
+  pastel: {
+    name: "Pastel Frost",
+    desc: "Gaya Glassmorphism nuansa soft pink, sage & icy teal yang lembut",
+    swatch: ["#1e292b", "#5d6b6b", "#bdd7d8", "#d5e5e5", "#ddd3d3", "#f7cbca"],
+    bg: "radial-gradient(ellipse 75% 55% at 50% 0%, rgba(247,203,202,0.28) 0%, transparent 65%), linear-gradient(160deg, #1a2325 0%, #29383b 55%, #151d1f 100%)",
+    orbs: { a: "#bdd7d8", b: "#f7cbca", o: 0.25 },
+    vars: {
+      "--c1": "#bdd7d8", "--c2": "#f7cbca", "--c3": "#fcd34d", "--c4": "#ddd3d3",
+      "--accent-solid": "#5d6b6b", "--accent-solid-2": "#3b4646", "--neg-solid": "#e89998",
+      "--glow": "rgba(189,215,216,0.3)",
+      "--glass-bg": "linear-gradient(135deg, rgba(213,229,229,0.15) 0%, rgba(247,203,202,0.08) 100%)",
+      "--glass-hover": "linear-gradient(135deg, rgba(213,229,229,0.24) 0%, rgba(247,203,202,0.14) 100%)",
+      "--glass-border": "rgba(221,211,211,0.25)",
+      "--glass-shadow": "0 10px 36px rgba(15,22,23,0.55), inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(189,215,216,0.15)",
+      "--blur": "28px",
+      "--sidebar-bg": "linear-gradient(180deg, rgba(41,56,59,0.65) 0%, rgba(26,35,37,0.85) 100%)",
+      "--thead-bg": "#2b3b3e", "--select-bg": "#29383b",
+      "--input-bg": "rgba(213,229,229,0.12)",
+      "--nav-active-bg": "linear-gradient(90deg, rgba(93,107,107,0.65) 0%, rgba(189,215,216,0.30) 100%)",
+      "--nav-active-border": "rgba(221,211,211,0.45)",
+      "--pill-bg": "#f7cbca", "--pill-text": "#1e292b",
+    },
+    chart: ["#bdd7d8", "#f7cbca", "#ddd3d3", "#8bb2b4", "#e8a09f", "#5d6b6b"],
+    primary: "#bdd7d8", secondary: "#f7cbca", warn: "#fcd34d", neg: "#e89998",
+    tick: "#e1eeee", tick2: "#a1b8b9", tip: "#29383b",
+  },
+};
+
+
+const GLASS_CSS = `
+  .glass{position:relative;background:var(--glass-bg);border:1px solid var(--glass-border);box-shadow:var(--glass-shadow);
+    -webkit-backdrop-filter:blur(var(--blur)) saturate(170%);backdrop-filter:blur(var(--blur)) saturate(170%);
+    transition:background .3s,box-shadow .3s,border-color .3s,transform .3s}
+  .glass-hover:hover{background:var(--glass-hover);box-shadow:0 0 30px var(--glow),var(--glass-shadow)}
+  .glass-thead{background:var(--thead-bg)}
+  .glass-select{background:var(--select-bg)}
+  .glass-select option{background:var(--select-bg);color:#fff}
+  .glass-input{background:var(--input-bg);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+  .glass-scroll::-webkit-scrollbar{width:8px;height:8px}
+  .glass-scroll::-webkit-scrollbar-thumb{background:var(--glass-border);border-radius:9999px}
+  .glass-scroll::-webkit-scrollbar-track{background:transparent}
+`;
+
 const RANGES = [{ k: "3M", n: 3 }, { k: "6M", n: 6 }, { k: "12M", n: 12 }, { k: "All", n: 99 }];
-const COLORS = ["#38bdf8", "#34d399", "#fbbf24", "#f472b6", "#a78bfa", "#64748b"];
 const sum = (a, s) => a.slice(s).reduce((x, y) => x + y, 0);
 const nice = (s) => s.replace(/_/g, " ");
 
 function Glass({ className = "", children }) {
   return (
-    <div className={"rounded-2xl border border-white/10 bg-white/[0.06] backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,.35)] " + className}>
+    <div className={"glass rounded-2xl " + className}>
       {children}
     </div>
   );
 }
 
-function Stat({ icon: Icon, label, value, sub, tone = "text-sky-300" }) {
+function Stat({ icon: Icon, label, value, sub, tone = "text-[color:var(--c1)]" }) {
   return (
-    <Glass className="p-4 transition duration-300 hover:-translate-y-1 hover:bg-white/10 hover:shadow-[0_0_30px_rgba(56,189,248,.25)]">
+    <Glass className="glass-hover p-4 hover:-translate-y-1">
       <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-white/10">
         <Icon size={18} className={tone} />
       </div>
@@ -157,6 +280,20 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currency, setCurrency] = useState("BRL");
   const [saveToast, setSaveToast] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    try { return localStorage.getItem("dashboard-theme") || "ocean"; } catch { return "ocean"; }
+  });
+  const T = THEMES[theme] || THEMES.ocean;
+  const changeTheme = (k) => {
+    setTheme(k);
+    try { localStorage.setItem("dashboard-theme", k); } catch { /* ignore */ }
+  };
+  const tip = {
+    background: T.tip + "f2",
+    border: "1px solid " + T.vars["--glass-border"],
+    borderRadius: 12,
+    color: "#fff",
+  };
 
   const RATE_USD = 0.20;
 
@@ -252,11 +389,33 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-[#0b2538] to-[#0e4a5e] text-white lg:flex font-sans antialiased">
+    <div
+      data-theme={theme}
+      className="relative min-h-screen text-white lg:flex font-sans antialiased"
+      style={{ ...T.vars, background: T.bg }}
+    >
+      <style>{GLASS_CSS}</style>
+
+      {/* Glow orbs — memberi "isi" di belakang kaca supaya efek blur terlihat */}
+      <div aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+        <div className="absolute -left-28 top-[18%] h-80 w-80 rounded-full blur-[110px]" style={{ background: T.orbs.a, opacity: T.orbs.o }} />
+        <div className="absolute -right-28 top-[18%] h-80 w-80 rounded-full blur-[110px]" style={{ background: T.orbs.a, opacity: T.orbs.o }} />
+        <div className="absolute -left-28 bottom-[8%] h-80 w-80 rounded-full blur-[110px]" style={{ background: T.orbs.a, opacity: T.orbs.o }} />
+        <div className="absolute -right-28 bottom-[8%] h-80 w-80 rounded-full blur-[110px]" style={{ background: T.orbs.a, opacity: T.orbs.o }} />
+        <div className="absolute left-1/3 -top-32 h-96 w-96 rounded-full blur-[130px]" style={{ background: T.orbs.b, opacity: T.orbs.o * 0.9 }} />
+      </div>
       {/* Sidebar navigation */}
-      <aside className="border-b border-white/10 bg-slate-900/60 p-4 backdrop-blur-xl lg:min-h-screen lg:w-60 lg:border-b-0 lg:border-r shrink-0">
-        <div className="mb-6 flex items-center gap-2 px-2 font-bold text-lg tracking-wide text-sky-400">
-          <ShoppingBag className="text-sky-400" size={22} />
+      <aside
+        className="relative z-10 border-b p-4 lg:min-h-screen lg:w-60 lg:border-b-0 lg:border-r shrink-0"
+        style={{
+          background: "var(--sidebar-bg)",
+          borderColor: "var(--glass-border)",
+          backdropFilter: "blur(24px) saturate(160%)",
+          WebkitBackdropFilter: "blur(24px) saturate(160%)",
+        }}
+      >
+        <div className="mb-6 flex items-center gap-2 px-2 font-bold text-lg tracking-wide text-[color:var(--c1)]">
+          <ShoppingBag className="text-[color:var(--c1)]" size={22} />
           <span>Olist Admin</span>
         </div>
         <nav className="flex gap-1 overflow-x-auto lg:flex-col">
@@ -264,10 +423,11 @@ export default function App() {
             <button
               key={name}
               onClick={() => setNav(name)}
+              style={nav === name ? { background: "var(--nav-active-bg)", borderColor: "var(--nav-active-border)", boxShadow: "0 0 20px var(--glow)" } : undefined}
               className={
                 "flex shrink-0 items-center gap-2.5 rounded-xl px-3.5 py-2.5 text-sm font-medium transition duration-200 " +
                 (nav === name
-                  ? "bg-sky-500/30 text-white shadow-[0_0_20px_rgba(56,189,248,.3)] border border-sky-400/30"
+                  ? "text-white border"
                   : "text-white/60 hover:bg-white/10 hover:text-white")
               }
             >
@@ -279,10 +439,10 @@ export default function App() {
       </aside>
 
       {/* Main content area */}
-      <main className="min-w-0 flex-1 p-4 lg:p-6">
+      <main className="relative z-10 min-w-0 flex-1 p-4 lg:p-6">
         {/* Top Header bar */}
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex min-w-[200px] flex-1 max-w-md items-center gap-2.5 rounded-xl border border-white/10 bg-white/5 px-3.5 py-2 text-sm text-white/50 focus-within:border-sky-400/50">
+          <div className="flex min-w-[200px] flex-1 max-w-md items-center gap-2.5 glass-input rounded-xl border border-white/10 px-3.5 py-2 text-sm text-white/50 focus-within:border-[color:var(--accent-solid)]">
             <Search size={16} />
             <input 
               type="text" 
@@ -296,7 +456,7 @@ export default function App() {
             <button className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
               <Bell size={18} className="text-white/70" />
             </button>
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-tr from-sky-500 to-emerald-400 text-sm font-bold text-slate-950 shadow-md">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-slate-950 shadow-md" style={{ background: "linear-gradient(135deg, var(--accent-solid), var(--c2))" }}>
               MF
             </div>
           </div>
@@ -306,19 +466,20 @@ export default function App() {
         <div className="mb-6 flex flex-wrap items-end justify-between gap-3 border-b border-white/10 pb-4">
           <div>
             <h1 className="text-2xl font-bold tracking-tight">
-              {nav === "Overview" ? `${getGreeting()}, Maulida Fatma 👋` : `${nav} View`}
+              {nav === "Overview" ? `${getGreeting()}, Maulida Fatma ` : `${nav} View`}
             </h1>
-            <p className="text-xs text-white/50 mt-1">Olist marketplace dataset · <span className="text-sky-300 font-medium">{label}</span></p>
+            <p className="text-xs text-white/50 mt-1">Olist marketplace dataset · <span className="text-[color:var(--c1)] font-medium">{label}</span></p>
           </div>
           <div className="flex gap-1 rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur-md" role="group" aria-label="Date range">
             {RANGES.map((r) => (
               <button
                 key={r.k}
                 onClick={() => setRange(r.k)}
+                style={range === r.k ? { background: "var(--pill-bg)", color: "var(--pill-text)" } : undefined}
                 className={
                   "rounded-full px-4 py-1.5 text-xs font-medium transition duration-200 " +
                   (range === r.k
-                    ? "bg-white text-slate-900 shadow-sm"
+                    ? "shadow-sm"
                     : "text-white/70 hover:bg-white/10 hover:text-white")
                 }
               >
@@ -336,16 +497,17 @@ export default function App() {
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
                   <div>
                     <h2 className="text-base font-semibold">{mode === "top" ? "Top 5" : "Bottom 5"} categories by revenue</h2>
-                    <p className="text-xs text-white/50 mt-0.5">{fmtMoney(v.revenue)} total · leader: <span className="text-sky-300 font-medium">{v.top.name}</span></p>
+                    <p className="text-xs text-white/50 mt-0.5">{fmtMoney(v.revenue)} total · leader: <span className="text-[color:var(--c1)] font-medium">{v.top.name}</span></p>
                   </div>
                   <div className="flex gap-1 rounded-full bg-white/10 p-1 text-xs">
                     {["top", "bottom"].map((m) => (
                       <button
                         key={m}
                         onClick={() => setMode(m)}
+                        style={mode === m ? { background: m === "top" ? "var(--accent-solid)" : "var(--neg-solid)" } : undefined}
                         className={
                           "rounded-full px-3.5 py-1 capitalize font-medium transition " +
-                          (mode === m ? (m === "top" ? "bg-sky-500 text-white shadow" : "bg-pink-500 text-white shadow") : "text-white/60 hover:bg-white/10 hover:text-white")
+                          (mode === m ? "text-white shadow" : "text-white/60 hover:bg-white/10 hover:text-white")
                         }
                       >
                         {m}
@@ -359,24 +521,24 @@ export default function App() {
                       <CartesianGrid stroke="rgba(255,255,255,.08)" vertical={false} />
                       <XAxis 
                         dataKey="name" 
-                        tick={{ fill: "#cbd5e1", fontSize: 10 }} 
+                        tick={{ fill: T.tick, fontSize: 10 }} 
                         interval={0} 
                         tickFormatter={(t) => (t.length > 12 ? t.slice(0, 11) + "…" : t)} 
                         axisLine={false} 
                         tickLine={false} 
                       />
                       <YAxis 
-                        tick={{ fill: "#94a3b8", fontSize: 10 }} 
+                        tick={{ fill: T.tick2, fontSize: 10 }} 
                         tickFormatter={(t) => (t >= 1000 ? Math.round(t / 1000) + "K" : t)} 
                         axisLine={false} 
                         tickLine={false} 
                       />
                       <Tooltip 
-                        cursor={{ fill: "rgba(255,255,255,.06)" }} 
+                        cursor={{ fill: "rgba(255,255,255,.07)" }} 
                         formatter={(x) => [fmtMoney(x), "Revenue"]} 
-                        contentStyle={{ background: "#0f2a3d", border: "1px solid rgba(255,255,255,.15)", borderRadius: 12, color: "#fff" }} 
+                        contentStyle={tip} 
                       />
-                      <Bar dataKey="value" fill={mode === "top" ? "#38bdf8" : "#f472b6"} radius={[8, 8, 0, 0]} />
+                      <Bar dataKey="value" fill={mode === "top" ? T.primary : T.neg} radius={[8, 8, 0, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -392,12 +554,12 @@ export default function App() {
                     <PieChart>
                       <Pie data={v.states} dataKey="value" innerRadius={48} outerRadius={70} paddingAngle={2} stroke="none">
                         {v.states.map((_, i) => (
-                          <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                          <Cell key={i} fill={T.chart[i % T.chart.length]} />
                         ))}
                       </Pie>
                       <Tooltip 
                         formatter={(x) => [x.toLocaleString("id-ID") + " items", "Volume"]} 
-                        contentStyle={{ background: "#0f2a3d", border: "1px solid rgba(255,255,255,.15)", borderRadius: 12, color: "#fff" }} 
+                        contentStyle={tip} 
                       />
                     </PieChart>
                   </ResponsiveContainer>
@@ -410,7 +572,7 @@ export default function App() {
                   {v.states.map((x, i) => (
                     <div key={x.name} className="flex justify-between items-center">
                       <span className="flex items-center gap-1.5 text-white/80">
-                        <i className="h-2 w-2 rounded-full inline-block" style={{ background: COLORS[i % COLORS.length] }} />
+                        <i className="h-2 w-2 rounded-full inline-block" style={{ background: T.chart[i % T.chart.length] }} />
                         {x.name}
                       </span>
                       <span className="text-white/60 font-mono">{x.value.toLocaleString("id-ID")}</span>
@@ -422,33 +584,33 @@ export default function App() {
 
             <div className="mb-6 grid grid-cols-2 gap-4 xl:grid-cols-4">
               <Stat icon={TrendingUp} label="Total revenue" value={fmtMoney(v.revenue)} sub={`Top: ${v.top.name} ${fmtMoney(v.top.value)}`} />
-              <Stat icon={Receipt} label="Total transactions" value={v.items.toLocaleString("id-ID")} sub={`SP: ${v.sp.toLocaleString("id-ID")} (${pct(v.sp, v.items)})`} tone="text-emerald-300" />
-              <Stat icon={CreditCard} label="Credit card payments" value={getPayVal("credit_card").toLocaleString("id-ID")} sub={`${pct(getPayVal("credit_card"), v.payTot)} of payments`} tone="text-amber-300" />
-              <Stat icon={Star} label="Avg review score" value={v.avg.toFixed(2) + " / 5"} sub={`${pct(v.rv[4]?.value || 0, v.rvTot)} give 5★`} tone="text-pink-300" />
+              <Stat icon={Receipt} label="Total transactions" value={v.items.toLocaleString("id-ID")} sub={`SP: ${v.sp.toLocaleString("id-ID")} (${pct(v.sp, v.items)})`} tone="text-[color:var(--c2)]" />
+              <Stat icon={CreditCard} label="Credit card payments" value={getPayVal("credit_card").toLocaleString("id-ID")} sub={`${pct(getPayVal("credit_card"), v.payTot)} of payments`} tone="text-[color:var(--c3)]" />
+              <Stat icon={Star} label="Avg review score" value={v.avg.toFixed(2) + " / 5"} sub={`${pct(v.rv[4]?.value || 0, v.rvTot)} give 5★`} tone="text-[color:var(--c4)]" />
               <Stat icon={Package} label="Orders" value={v.orders.toLocaleString("id-ID")} sub={`AOV ${fmtMoney(v.revenue / (v.orders || 1))}`} />
-              <Stat icon={Percent} label="Boleto payments" value={getPayVal("boleto").toLocaleString("id-ID")} sub={`${pct(getPayVal("boleto"), v.payTot)} of payments`} tone="text-emerald-300" />
-              <Stat icon={Repeat} label="Avg installments" value={v.inst.toFixed(2)} sub="per payment record" tone="text-amber-300" />
-              <Stat icon={ThumbsDown} label="1★ reviews" value={pct(v.rv[0]?.value || 0, v.rvTot)} sub={`${(v.rv[0]?.value || 0).toLocaleString("id-ID")} reviews`} tone="text-pink-300" />
+              <Stat icon={Percent} label="Boleto payments" value={getPayVal("boleto").toLocaleString("id-ID")} sub={`${pct(getPayVal("boleto"), v.payTot)} of payments`} tone="text-[color:var(--c2)]" />
+              <Stat icon={Repeat} label="Avg installments" value={v.inst.toFixed(2)} sub="per payment record" tone="text-[color:var(--c3)]" />
+              <Stat icon={ThumbsDown} label="1★ reviews" value={pct(v.rv[0]?.value || 0, v.rvTot)} sub={`${(v.rv[0]?.value || 0).toLocaleString("id-ID")} reviews`} tone="text-[color:var(--c4)]" />
             </div>
 
             <div className="grid gap-5 lg:grid-cols-2">
               <Glass className="p-5 flex flex-col justify-between">
                 <h2 className="mb-3 flex items-center gap-2 text-base font-semibold">
-                  <ThumbsUp size={16} className="text-sky-300" />
+                  <ThumbsUp size={16} className="text-[color:var(--c1)]" />
                   Review score distribution
                 </h2>
                 <div className="h-44 w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={v.rv}>
-                      <XAxis dataKey="star" tick={{ fill: "#cbd5e1", fontSize: 11 }} axisLine={false} tickLine={false} />
+                      <XAxis dataKey="star" tick={{ fill: T.tick, fontSize: 11 }} axisLine={false} tickLine={false} />
                       <Tooltip 
-                        cursor={{ fill: "rgba(255,255,255,.06)" }} 
+                        cursor={{ fill: "rgba(255,255,255,.07)" }} 
                         formatter={(val) => [val.toLocaleString("id-ID") + " reviews", "Count"]}
-                        contentStyle={{ background: "#0f2a3d", border: "1px solid rgba(255,255,255,.15)", borderRadius: 12, color: "#fff" }} 
+                        contentStyle={tip} 
                       />
                       <Bar dataKey="value" radius={[6, 6, 0, 0]}>
                         {v.rv.map((_, i) => (
-                          <Cell key={i} fill={i < 2 ? "#f472b6" : i === 2 ? "#fbbf24" : "#34d399"} />
+                          <Cell key={i} fill={i < 2 ? T.neg : i === 2 ? T.warn : T.secondary} />
                         ))}
                       </Bar>
                     </BarChart>
@@ -487,9 +649,9 @@ export default function App() {
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
               <Stat icon={Package} label="Total Categories" value={v.cats.length.toString()} sub="Active product lines" />
-              <Stat icon={TrendingUp} label="Top Category Revenue" value={fmtMoney(v.top.value)} sub={v.top.name} tone="text-emerald-300" />
-              <Stat icon={Layers} label="Avg Revenue / Category" value={fmtMoney(v.revenue / (v.cats.length || 1))} sub="Across active categories" tone="text-amber-300" />
-              <Stat icon={Star} label="Lowest Rated Category" value={nice(D.WORST[0][0])} sub={`${D.WORST[0][1]} ★ score`} tone="text-pink-300" />
+              <Stat icon={TrendingUp} label="Top Category Revenue" value={fmtMoney(v.top.value)} sub={v.top.name} tone="text-[color:var(--c2)]" />
+              <Stat icon={Layers} label="Avg Revenue / Category" value={fmtMoney(v.revenue / (v.cats.length || 1))} sub="Across active categories" tone="text-[color:var(--c3)]" />
+              <Stat icon={Star} label="Lowest Rated Category" value={nice(D.WORST[0][0])} sub={`${D.WORST[0][1]} ★ score`} tone="text-[color:var(--c4)]" />
             </div>
 
             <Glass className="p-5">
@@ -497,14 +659,14 @@ export default function App() {
                 <div>
                   <h2 className="text-base font-semibold">Category Performance Breakdown</h2>
                   <p className="text-xs text-white/50">
-                    Showing all <span className="text-sky-300 font-semibold">{filteredCats.length}</span> categories
+                    Showing all <span className="text-[color:var(--c1)] font-semibold">{filteredCats.length}</span> categories
                   </p>
                 </div>
               </div>
               
-              <div className="max-h-[550px] overflow-y-auto pr-1">
+              <div className="glass-scroll max-h-[550px] overflow-y-auto pr-1">
                 <table className="w-full text-left text-sm text-white/80 border-collapse">
-                  <thead className="sticky top-0 z-10 bg-[#0c283c] border-b border-white/10 text-xs font-semibold uppercase text-white/50">
+                  <thead className="glass-thead sticky top-0 z-10 border-b border-white/10 text-xs font-semibold uppercase text-white/50">
                     <tr>
                       <th className="py-3 px-3 text-center w-12">No</th>
                       <th className="py-3 px-4">Category Name</th>
@@ -516,9 +678,9 @@ export default function App() {
                     {filteredCats.map((cat, index) => (
                       <tr key={cat.rawKey} className="hover:bg-white/5 transition">
                         <td className="py-3 px-3 text-center font-mono text-xs text-white/40">{index + 1}</td>
-                        <td className="py-3 px-4 font-medium capitalize text-sky-200">{cat.name}</td>
+                        <td className="py-3 px-4 font-medium capitalize text-[color:var(--c1)]">{cat.name}</td>
                         <td className="py-3 px-4 text-right">{pct(cat.value, v.revenue)}</td>
-                        <td className="py-3 px-4 text-right font-mono font-semibold text-emerald-400">{fmtMoney(cat.value)}</td>
+                        <td className="py-3 px-4 text-right font-mono font-semibold text-[color:var(--c2)]">{fmtMoney(cat.value)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -533,10 +695,10 @@ export default function App() {
         {nav === "Payments" && (
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
-              <Stat icon={CreditCard} label="Credit Card Total" value={getPayVal("credit_card").toLocaleString("id-ID")} sub={`${pct(getPayVal("credit_card"), v.payTot)} share`} tone="text-sky-300" />
-              <Stat icon={Receipt} label="Boleto Total" value={getPayVal("boleto").toLocaleString("id-ID")} sub={`${pct(getPayVal("boleto"), v.payTot)} share`} tone="text-emerald-300" />
-              <Stat icon={Repeat} label="Avg Installments" value={v.inst.toFixed(2)} sub="Monthly average" tone="text-amber-300" />
-              <Stat icon={Percent} label="Voucher / Debit Share" value={pct(getPayVal("voucher") + getPayVal("debit_card"), v.payTot)} sub="Alternative methods" tone="text-pink-300" />
+              <Stat icon={CreditCard} label="Credit Card Total" value={getPayVal("credit_card").toLocaleString("id-ID")} sub={`${pct(getPayVal("credit_card"), v.payTot)} share`} tone="text-[color:var(--c1)]" />
+              <Stat icon={Receipt} label="Boleto Total" value={getPayVal("boleto").toLocaleString("id-ID")} sub={`${pct(getPayVal("boleto"), v.payTot)} share`} tone="text-[color:var(--c2)]" />
+              <Stat icon={Repeat} label="Avg Installments" value={v.inst.toFixed(2)} sub="Monthly average" tone="text-[color:var(--c3)]" />
+              <Stat icon={Percent} label="Voucher / Debit Share" value={pct(getPayVal("voucher") + getPayVal("debit_card"), v.payTot)} sub="Alternative methods" tone="text-[color:var(--c4)]" />
             </div>
 
             <div className="grid gap-5 lg:grid-cols-2">
@@ -546,10 +708,10 @@ export default function App() {
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={v.pay}>
                       <CartesianGrid stroke="rgba(255,255,255,.08)" vertical={false} />
-                      <XAxis dataKey="name" tick={{ fill: "#cbd5e1", fontSize: 10 }} axisLine={false} tickLine={false} />
-                      <YAxis tick={{ fill: "#94a3b8", fontSize: 10 }} axisLine={false} tickLine={false} />
-                      <Tooltip contentStyle={{ background: "#0f2a3d", border: "1px solid rgba(255,255,255,.15)", borderRadius: 12, color: "#fff" }} />
-                      <Bar dataKey="value" fill="#38bdf8" radius={[8, 8, 0, 0]} />
+                      <XAxis dataKey="name" tick={{ fill: T.tick, fontSize: 10 }} axisLine={false} tickLine={false} />
+                      <YAxis tick={{ fill: T.tick2, fontSize: 10 }} axisLine={false} tickLine={false} />
+                      <Tooltip contentStyle={tip} />
+                      <Bar dataKey="value" fill={T.primary} radius={[8, 8, 0, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -562,10 +724,10 @@ export default function App() {
                     <PieChart>
                       <Pie data={v.pay} dataKey="value" innerRadius={55} outerRadius={85} paddingAngle={3} stroke="none">
                         {v.pay.map((_, i) => (
-                          <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                          <Cell key={i} fill={T.chart[i % T.chart.length]} />
                         ))}
                       </Pie>
-                      <Tooltip contentStyle={{ background: "#0f2a3d", border: "1px solid rgba(255,255,255,.15)", borderRadius: 12, color: "#fff" }} />
+                      <Tooltip contentStyle={tip} />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
@@ -578,9 +740,9 @@ export default function App() {
         {nav === "Sellers" && (
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4 xl:grid-cols-3">
-              <Stat icon={MapPin} label="Total Items Sold" value={v.items.toLocaleString("id-ID")} sub="All seller locations" tone="text-sky-300" />
-              <Stat icon={Award} label="Top State (SP)" value={v.sp.toLocaleString("id-ID")} sub={`${pct(v.sp, v.items)} market share`} tone="text-emerald-300" />
-              <Stat icon={Users} label="Other States Total" value={(v.items - v.sp).toLocaleString("id-ID")} sub="Regional sellers" tone="text-amber-300" />
+              <Stat icon={MapPin} label="Total Items Sold" value={v.items.toLocaleString("id-ID")} sub="All seller locations" tone="text-[color:var(--c1)]" />
+              <Stat icon={Award} label="Top State (SP)" value={v.sp.toLocaleString("id-ID")} sub={`${pct(v.sp, v.items)} market share`} tone="text-[color:var(--c2)]" />
+              <Stat icon={Users} label="Other States Total" value={(v.items - v.sp).toLocaleString("id-ID")} sub="Regional sellers" tone="text-[color:var(--c3)]" />
             </div>
 
             <Glass className="p-5">
@@ -589,10 +751,10 @@ export default function App() {
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={v.states}>
                     <CartesianGrid stroke="rgba(255,255,255,.08)" vertical={false} />
-                    <XAxis dataKey="name" tick={{ fill: "#cbd5e1", fontSize: 11 }} axisLine={false} tickLine={false} />
-                    <YAxis tick={{ fill: "#94a3b8", fontSize: 11 }} axisLine={false} tickLine={false} />
-                    <Tooltip contentStyle={{ background: "#0f2a3d", border: "1px solid rgba(255,255,255,.15)", borderRadius: 12, color: "#fff" }} />
-                    <Bar dataKey="value" fill="#34d399" radius={[8, 8, 0, 0]} />
+                    <XAxis dataKey="name" tick={{ fill: T.tick, fontSize: 11 }} axisLine={false} tickLine={false} />
+                    <YAxis tick={{ fill: T.tick2, fontSize: 11 }} axisLine={false} tickLine={false} />
+                    <Tooltip contentStyle={tip} />
+                    <Bar dataKey="value" fill={T.secondary} radius={[8, 8, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -604,10 +766,10 @@ export default function App() {
         {nav === "Reviews" && (
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
-              <Stat icon={Star} label="Average Rating" value={v.avg.toFixed(2) + " / 5"} sub="Overall score" tone="text-pink-300" />
-              <Stat icon={ThumbsUp} label="Positive Reviews (4-5★)" value={pct((v.rv[3]?.value || 0) + (v.rv[4]?.value || 0), v.rvTot)} sub="Customer satisfaction" tone="text-emerald-300" />
-              <Stat icon={ThumbsDown} label="Negative Reviews (1★)" value={pct(v.rv[0]?.value || 0, v.rvTot)} sub="Requires intervention" tone="text-rose-400" />
-              <Stat icon={Receipt} label="Total Reviews" value={v.rvTot.toLocaleString("id-ID")} sub="Recorded feedback" tone="text-amber-300" />
+              <Stat icon={Star} label="Average Rating" value={v.avg.toFixed(2) + " / 5"} sub="Overall score" tone="text-[color:var(--c4)]" />
+              <Stat icon={ThumbsUp} label="Positive Reviews (4-5★)" value={pct((v.rv[3]?.value || 0) + (v.rv[4]?.value || 0), v.rvTot)} sub="Customer satisfaction" tone="text-[color:var(--c2)]" />
+              <Stat icon={ThumbsDown} label="Negative Reviews (1★)" value={pct(v.rv[0]?.value || 0, v.rvTot)} sub="Requires intervention" tone="text-[color:var(--c4)]" />
+              <Stat icon={Receipt} label="Total Reviews" value={v.rvTot.toLocaleString("id-ID")} sub="Recorded feedback" tone="text-[color:var(--c3)]" />
             </div>
 
             <div className="grid gap-5 lg:grid-cols-2">
@@ -617,10 +779,10 @@ export default function App() {
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={v.rv}>
                       <CartesianGrid stroke="rgba(255,255,255,.08)" vertical={false} />
-                      <XAxis dataKey="star" tick={{ fill: "#cbd5e1", fontSize: 11 }} axisLine={false} tickLine={false} />
-                      <YAxis tick={{ fill: "#94a3b8", fontSize: 11 }} axisLine={false} tickLine={false} />
-                      <Tooltip contentStyle={{ background: "#0f2a3d", border: "1px solid rgba(255,255,255,.15)", borderRadius: 12, color: "#fff" }} />
-                      <Bar dataKey="value" fill="#fbbf24" radius={[8, 8, 0, 0]} />
+                      <XAxis dataKey="star" tick={{ fill: T.tick, fontSize: 11 }} axisLine={false} tickLine={false} />
+                      <YAxis tick={{ fill: T.tick2, fontSize: 11 }} axisLine={false} tickLine={false} />
+                      <Tooltip contentStyle={tip} />
+                      <Bar dataKey="value" fill={T.warn} radius={[8, 8, 0, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -650,9 +812,9 @@ export default function App() {
         {nav === "Customers" && (
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4 xl:grid-cols-3">
-              <Stat icon={Users} label="Total Orders" value={v.orders.toLocaleString("id-ID")} sub="Order volume" tone="text-sky-300" />
-              <Stat icon={DollarSign} label="Average Order Value" value={fmtMoney(v.revenue / (v.orders || 1))} sub="Revenue per order" tone="text-emerald-300" />
-              <Stat icon={TrendingUp} label="Total Revenue" value={fmtMoney(v.revenue)} sub="Period total" tone="text-amber-300" />
+              <Stat icon={Users} label="Total Orders" value={v.orders.toLocaleString("id-ID")} sub="Order volume" tone="text-[color:var(--c1)]" />
+              <Stat icon={DollarSign} label="Average Order Value" value={fmtMoney(v.revenue / (v.orders || 1))} sub="Revenue per order" tone="text-[color:var(--c2)]" />
+              <Stat icon={TrendingUp} label="Total Revenue" value={fmtMoney(v.revenue)} sub="Period total" tone="text-[color:var(--c3)]" />
             </div>
 
             <Glass className="p-5">
@@ -661,10 +823,10 @@ export default function App() {
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={v.monthlyTrends}>
                     <CartesianGrid stroke="rgba(255,255,255,.08)" vertical={false} />
-                    <XAxis dataKey="month" tick={{ fill: "#cbd5e1", fontSize: 10 }} axisLine={false} tickLine={false} />
-                    <YAxis tick={{ fill: "#94a3b8", fontSize: 10 }} axisLine={false} tickLine={false} />
-                    <Tooltip contentStyle={{ background: "#0f2a3d", border: "1px solid rgba(255,255,255,.15)", borderRadius: 12, color: "#fff" }} />
-                    <Line type="monotone" dataKey="revenue" stroke="#38bdf8" strokeWidth={2} dot={{ fill: "#38bdf8" }} />
+                    <XAxis dataKey="month" tick={{ fill: T.tick, fontSize: 10 }} axisLine={false} tickLine={false} />
+                    <YAxis tick={{ fill: T.tick2, fontSize: 10 }} axisLine={false} tickLine={false} />
+                    <Tooltip contentStyle={tip} />
+                    <Line type="monotone" dataKey="revenue" stroke={T.primary} strokeWidth={2} dot={{ fill: T.primary }} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -675,10 +837,10 @@ export default function App() {
         {/* TAB 7: SETTINGS */}
         {nav === "Settings" && (
           <div className="space-y-6">
-            <Glass className="p-6 max-w-2xl">
+            <Glass className="p-6 max-w-3xl">
               <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
                 <h2 className="text-lg font-bold flex items-center gap-2">
-                  <Settings size={22} className="text-sky-400" />
+                  <Settings size={22} className="text-[color:var(--c1)]" />
                   Dashboard Preferences & Settings
                 </h2>
                 <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono">
@@ -687,6 +849,45 @@ export default function App() {
               </div>
               
               <div className="space-y-5 text-sm">
+                <div className="border-b border-white/10 pb-5">
+                  <div className="mb-3 flex items-center gap-2">
+                    <Palette size={18} className="text-[color:var(--c1)]" />
+                    <div>
+                      <div className="font-semibold text-white">Dashboard Theme</div>
+                      <div className="text-xs text-white/50">Ubah warna & gaya dashboard — tersimpan otomatis</div>
+                    </div>
+                  </div>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {Object.entries(THEMES).map(([k, th]) => {
+                      const active = theme === k;
+                      return (
+                        <button
+                          key={k}
+                          onClick={() => changeTheme(k)}
+                          aria-pressed={active}
+                          className="glass glass-hover rounded-2xl p-3 text-left"
+                          style={active ? { borderColor: "var(--accent-solid)", boxShadow: "0 0 24px var(--glow)" } : undefined}
+                        >
+                          <div className="mb-3 flex h-14 overflow-hidden rounded-xl ring-1 ring-white/10" style={{ background: th.bg }}>
+                            {th.swatch.map((c) => (
+                              <div key={c} className="flex-1" style={{ background: c }} title={c} />
+                            ))}
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className="font-semibold text-white">{th.name}</span>
+                            {active && (
+                              <span className="flex h-5 w-5 items-center justify-center rounded-full" style={{ background: "var(--accent-solid)" }}>
+                                <Check size={12} className="text-white" />
+                              </span>
+                            )}
+                          </div>
+                          <div className="mt-0.5 text-xs text-white/50">{th.desc}</div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
                 <div className="flex items-center justify-between border-b border-white/10 pb-4">
                   <div>
                     <div className="font-semibold text-white">Display Currency</div>
@@ -695,7 +896,7 @@ export default function App() {
                   <select 
                     value={currency} 
                     onChange={(e) => setCurrency(e.target.value)}
-                    className="bg-slate-800 text-white font-medium rounded-xl px-3.5 py-2 border border-white/20 focus:border-sky-400 focus:outline-none cursor-pointer"
+                    className="glass-select text-white font-medium rounded-xl px-3.5 py-2 border border-white/20 focus:border-[color:var(--accent-solid)] focus:outline-none cursor-pointer"
                   >
                     <option value="BRL">BRL (R$)</option>
                     <option value="USD">USD ($)</option>
@@ -712,9 +913,10 @@ export default function App() {
                       <button
                         key={r.k}
                         onClick={() => setRange(r.k)}
+                        style={range === r.k ? { background: "var(--accent-solid)" } : undefined}
                         className={
                           "px-3 py-1 rounded-lg text-xs font-medium transition " +
-                          (range === r.k ? "bg-sky-500 text-white shadow-sm" : "text-white/60 hover:text-white")
+                          (range === r.k ? "text-white shadow-sm" : "text-white/60 hover:text-white")
                         }
                       >
                         {r.k}
@@ -745,7 +947,8 @@ export default function App() {
                   <span className="text-xs text-white/40">Cleaned Olist Dataset v1.0</span>
                   <button 
                     onClick={handleExportCSV}
-                    className="flex items-center gap-2 bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white px-5 py-2.5 rounded-xl text-xs font-semibold shadow-lg shadow-sky-500/25 transition active:scale-95"
+                    style={{ background: "linear-gradient(90deg, var(--accent-solid), var(--accent-solid-2))", boxShadow: "0 8px 24px var(--glow)" }}
+                    className="flex items-center gap-2 text-white px-5 py-2.5 rounded-xl text-xs font-semibold transition hover:brightness-110 active:scale-95"
                   >
                     <Download size={16} />
                     Export Category Data (.CSV)
