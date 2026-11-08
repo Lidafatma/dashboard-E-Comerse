@@ -8,7 +8,8 @@ Dashboard admin interaktif untuk menganalisis data marketplace **Olist** (e-comm
 
 ## 🖼️ Tampilan
 
-<img width="100%" alt="Screenshot (98)" src="https://github.com/user-attachments/assets/31c760c6-2663-4a5c-8a0c-e64f733ef0c7" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/34f0588f-862f-4ca0-b160-f772ce121a78" />
+
 
 
 ---
