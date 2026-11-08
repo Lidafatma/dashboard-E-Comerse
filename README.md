@@ -10,7 +10,7 @@ Dashboard admin interaktif untuk menganalisis data marketplace **Olist** (e-comm
 
 >
 > ```md
-> ![Overview](./screenshots/overview.png)
+> <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ef186778-5ca0-4470-b7f3-c0345fddfe23" />
 > ```
 
 ---
@@ -133,4 +133,4 @@ GitHub: [@lidafatma](https://github.com/lidafatma)
 
 ## 📄 Lisensi
 
-Proyek ini dibuat untuk keperluan pembelajaran dan portofolio. Dataset © Olist, tersedia di bawah lisensi **CC BY-NC-SA 4.0** sesuai ketentuan di Kaggle.<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ef186778-5ca0-4470-b7f3-c0345fddfe23" />
+Proyek ini dibuat untuk keperluan pembelajaran dan portofolio. Dataset © Olist, tersedia di bawah lisensi **CC BY-NC-SA 4.0** sesuai ketentuan di Kaggle.
