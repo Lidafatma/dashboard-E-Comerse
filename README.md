@@ -8,7 +8,6 @@ Dashboard admin interaktif untuk menganalisis data marketplace **Olist** (e-comm
 
 ## 🖼️ Tampilan
 
-> Tambahkan screenshot dashboard di sini, misalnya:
 >
 > ```md
 > ![Overview](./screenshots/overview.png)
