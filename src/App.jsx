@@ -409,7 +409,7 @@ const GLASS_CSS = `
     inset: 0;
     border-radius: inherit;
     pointer-events: none;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     mask: linear-gradient(to bottom, black, transparent);
     -webkit-mask: linear-gradient(to bottom, black, transparent);
   }
